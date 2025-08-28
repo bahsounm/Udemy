@@ -14,12 +14,12 @@ def hangman():
     current_gallow = d7a.hangman_pics[lives]
 
     print(chosen_word)
+    print(d7a.title)
     print(current_gallow)
     print(f"Word to Guess: {placeholder}")
 
     while lives >0:
         count = 0
-        print("*"*10 + str(lives)+ "/6 LIVES LEFT*"*10)
         user_guess = input("Make a guess? (lowercase please) ").lower()
         
         while user_guess in placeholder or len(user_guess) != 1:
@@ -40,7 +40,9 @@ def hangman():
             lives -=1
         
         print(d7a.hangman_pics[lives])
-        print(f"Word to Guess: {placeholder}")
+        print("*"*20 +" "+ str(lives)+ "/6 LIVES LEFT " + "*"*20)
+        if lives != 0: print(f"Word to Guess: {placeholder}") 
+        else: print(f"Word to Guess: {chosen_word}")
     
     return False
 
