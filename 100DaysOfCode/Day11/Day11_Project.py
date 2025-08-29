@@ -19,6 +19,15 @@ def calc_hand(hand):
         s = s-10
     return s
 
+def outcome(user, cpu):
+    if user > 21:
+        print("You Lose")
+    elif cpu > 21 or user > cpu:
+        print("You Win")
+    elif user == cpu:
+        print("Draw")
+    else:
+        print("You Lose")
 
 
 def blackjack():
@@ -49,16 +58,7 @@ def blackjack():
     print(f"    Computer's Final Hand: {players['cpu']['hand']}, Final score: {players['cpu']['score']}")
     
     
-    user, cpu = players["user"]["score"], players["cpu"]["score"]
-    if user > 21:
-        print("You Lose")
-    elif cpu > 21 or user > cpu:
-        print("You Win")
-    elif user == cpu:
-        print("Draw")
-    else:
-        print("You Lose")
-
+    outcome(players["user"]["score"], players["cpu"]["score"])
 
 
 while True:
