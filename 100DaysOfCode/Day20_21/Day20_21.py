@@ -9,6 +9,7 @@ screen.title("Snake Game")
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
 screen.tracer(0) # this is how we turn of the animations, cause when the snake moves it fidgets
+screen.listen() # this is for listening to key press events 
 #----------------------------------------------------------------------------------------------------------
 # Running our Game
 game_is_on = True
@@ -21,6 +22,9 @@ while game_is_on:
 
     snake.move()
 
+    for key in snake.keys:
+        screen.onkey(lambda k=key:snake.turn(k), key)
 
 
+#----------------------------------------------------------------------------------------------------------
 screen.exitonclick()
