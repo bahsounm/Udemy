@@ -14,7 +14,10 @@ class Snake:
         for i in range(3):
             # default turtle size is 20x20
             turtle = Turtle(shape="square")
-            turtle.color("white")
+            if i == 0:
+                turtle.color("orange")
+            else:
+                turtle.color("green")
             turtle.penup()
             turtle.setx(-20*i)
             self.snake.append(turtle)
@@ -33,3 +36,10 @@ class Snake:
         # this allows us to control movement, the snake is not allowed to move back on itself
         if (self.head.heading() == 90 and key != "Down") or (self.head.heading() == 270 and key != "Up") or (self.head.heading() == 0 and key != "Left") or (self.head.heading() == 180 and key != "Right"):
             self.head.setheading(headings[self.keys.index(key)])
+
+    def extend(self):
+        turtle = Turtle(shape="square")
+        turtle.color("green")
+        turtle.penup()
+        turtle.goto(self.snake[-1].position())
+        self.snake.append(turtle)
