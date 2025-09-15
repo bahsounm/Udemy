@@ -7,6 +7,7 @@ class Snake:
         # create our snakes
         self.snake = []
         self.create_snake()
+        self.head = self.snake[0]
         self.keys = ["Up", "Down", "Left", "Right"]
 
     def create_snake(self):
@@ -28,5 +29,7 @@ class Snake:
 
     def turn(self, key):
         # heading allows us to change which way the snake is going to move
-        heading = [90, 270, 180, 0]
-        self.snake[0].setheading(heading[self.keys.index(key)])
+        headings = [90, 270, 180, 0]
+        # this allows us to control movement, the snake is not allowed to move back on itself
+        if (self.head.heading() == 90 and key != "Down") or (self.head.heading() == 270 and key != "Up") or (self.head.heading() == 0 and key != "Left") or (self.head.heading() == 180 and key != "Right"):
+            self.head.setheading(headings[self.keys.index(key)])
