@@ -1,5 +1,4 @@
 from turtle import Turtle
-import random as rand
 
 SPEED = 15
 class Ball(Turtle):

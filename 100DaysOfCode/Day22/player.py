@@ -1,5 +1,4 @@
 from turtle import Turtle
-
 SPEED = 20
 
 class Player(Turtle):

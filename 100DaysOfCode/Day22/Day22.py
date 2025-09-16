@@ -1,6 +1,5 @@
 # Pong Game
-from turtle import Screen, Turtle
-import random as rand
+from turtle import Screen
 import time
 from board import Board
 from score import Score
