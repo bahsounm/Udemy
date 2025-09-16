@@ -28,21 +28,20 @@ player2 = Player((360,0))
 #----------------------------------------------------------------------------------------------------------
 # Creating our game logic
 game_is_on = True
+# Player 1 movement keys (REMEMBER THE FUNCTION CANNOT HAVE "()")
+screen.onkeypress(key = "w", fun = player1.move_up)
+screen.onkeypress(key = "s", fun = player1.move_down)
+
+# Player 2 movement keys (REMEMBER THE FUNCTION CANNOT HAVE "()")
+screen.onkeypress(key = "Up", fun = player2.move_up)
+screen.onkeypress(key = "Down", fun = player2.move_down)
+
 
 while game_is_on:
     time.sleep(0.1)
     screen.update()
 
     ball.start()
-
-    # Player 1 movement keys (REMEMBER THE FUNCTION CANNOT HAVE "()")
-    screen.onkeypress(key = "w", fun = player1.move_up)
-    screen.onkeypress(key = "s", fun = player1.move_down)
-
-    # Player 2 movement keys (REMEMBER THE FUNCTION CANNOT HAVE "()")
-    screen.onkeypress(key = "Up", fun = player2.move_up)
-    screen.onkeypress(key = "Down", fun = player2.move_down)
-
 
     # Detect collision of the paddle with the roof and floor
     if player1.ycor() > 230 or player1.ycor() < -219:
