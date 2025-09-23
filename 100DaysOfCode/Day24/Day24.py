@@ -1,6 +1,6 @@
 # opening, and reading the file
 
-file = open("myfile.txt")
+file = open("../../../../../Desktop/Praise be to God.txt")
 contents = file.read()
 print(contents)
 file.close() # need to closer at some point to enhance performance
@@ -19,3 +19,10 @@ with open("myfile.txt") as f:
 
 with open("myfile.txt", mode="a") as f:
     pass
+
+# understanding relative and absolute file paths
+"""
+Absolute: start from the root, and make their way to the desired file = ""/Users/Bahsoun/Desktop/Praise be to God.txt""
+
+Relative: starts from the working directory = "../../../../../Desktop/Praise be to God.txt"
+"""
