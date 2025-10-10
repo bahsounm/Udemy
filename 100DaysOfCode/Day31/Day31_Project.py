@@ -70,10 +70,10 @@ lang_label = tk.Label(text="Arabic",font=("Arial", 30, "bold", "italic"), bg="wh
 lang_label.grid(column=1, row=1)
 # =================================================================================
 # Word to study
-ar_word = tk.Label(text=dict_of_words[index]["Arabic"],font=("Arial", 40), bg="white")
+ar_word = tk.Label(text=dict_of_words[index]["Arabic"],font=("Arial", 40), bg="white", anchor="center", width=5)
 ar_word.grid(column=1, row=2)
 
-en_word = tk.Label(text=dict_of_words[index]["English"],font=("Arial", 40), bg="white")
+en_word = tk.Label(text=dict_of_words[index]["English"],font=("Arial", 40), bg="white", anchor="center", width=5)
 en_word.grid_forget()
 # =================================================================================
 # Correct Button
