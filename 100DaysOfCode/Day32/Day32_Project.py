@@ -43,7 +43,3 @@ if need_to_wish:
         connection.starttls()
         connection.login(user=MY_EMAIL, password=MY_PASS)
         connection.sendmail(from_addr=MY_EMAIL, to_addrs=birthdays[name]["email"], msg="Subject:HAPPY BIRTHDAY {}\n\n{}".format(name, birthday_msg))
-
-
-
-
