@@ -7,6 +7,7 @@ THEME_COLOR = "#375362"
 class QuizInterface:
     def __init__(self, quiz_brain:QuizBrain):
         self.quiz = quiz_brain
+        self.score = 0
         self.window = tkinter.Tk()
         self.window.title("Quizzler")
         self.window.config(bg=THEME_COLOR, padx=20,pady=20)
@@ -35,12 +36,18 @@ class QuizInterface:
         self.window.mainloop()
 
     def get_next_question(self):
-        q_text = self.quiz.next_question()
-        self.canvas.itemconfig(self.question_text, text=q_text, fill=THEME_COLOR)
+        try:
+            q_text = self.quiz.next_question()
+        except:
+            self.canvas.itemconfig(self.question_text, text="Completed the Quiz\n\nFinal Score {}/10".format(self.score), fill=THEME_COLOR)
+            self.correct_button.config(state="disabled")
+            self.incorrect_button.config(state="disabled")
+        else:
+            self.canvas.itemconfig(self.question_text, text=q_text, fill=THEME_COLOR)
 
     def check_quiz_answer(self, button_clicked):
         score, result = self.quiz.check_answer(button_clicked)
-        
+        self.score = score
         self.score_label.config(text="Score {}".format(score))
         if result:
             self.canvas.itemconfig(self.question_text, text="Correct ✅", fill="green")
