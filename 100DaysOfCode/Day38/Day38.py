@@ -1,8 +1,9 @@
 import requests
 import datetime as dt
-import sys
+import sys, os
 
-API_KEY = "aXd5K68qdRv2F1vcxoYHZw==of7aNlUXyeGGIaw5"
+API_KEY = os.environ.get("API_KEY")
+SHEETY_AUTH = os.environ.get("SHEETY_AUTH")
 WEIGHT = 230
 DATE_TODAY = dt.datetime.now().strftime("%Y/%m/%d")
 
@@ -48,6 +49,10 @@ our_workout = {"workout":{
     "duration":workout_data["Duration"],
     "calories":workout_data["Calories"]
 }}
-response = requests.post(url=SHEETY_ENPOINT, json=our_workout)
+
+headers = {
+    "Authorization": SHEETY_AUTH
+}
+response = requests.post(url=SHEETY_ENPOINT, json=our_workout, headers=headers)
 response.raise_for_status()
 
