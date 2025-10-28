@@ -7,10 +7,10 @@ AMADEUS_API_SECRET = os.environ.get("AMADEUS_API_SECRET")
 
 parameters = {
     "grant_type": "client_credentials",
-    "client_id": AMADEUS_API_KEY,
-    "client_secret": AMADEUS_API_SECRET
+    "client_id": "ppNXtOcRs6wCu0ccmLZy5ugkHBCUPpqJ",
+    "client_secret": "saH1ajxHBZjmVL7L"
 }
 
-response = requests.post(url="https://test.api.amadeus.com/v1/security/oauth2/token", json=parameters, headers={"Content-Type":"application/x-www-form-urlencoded"})
+response = requests.post(url="https://test.api.amadeus.com/v1/security/oauth2/token", data=parameters, headers={"Content-Type":"application/x-www-form-urlencoded"})
 response.raise_for_status()
-print(response.json())
+print(response.json()["access_token"])
