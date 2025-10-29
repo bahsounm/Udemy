@@ -106,7 +106,7 @@ class FlightSearch:
         # give up on this date after retries
         return None
 
-    def find_cheapest_offer(self, dest_loc_code, step_days=7, start=0, window_days=182, trip_days=14):
+    def find_cheapest_offer(self, dest_loc_code, step_days=7, start=0, window_days=30, trip_days=14):
         results = {}
         best = None
         best_price = None

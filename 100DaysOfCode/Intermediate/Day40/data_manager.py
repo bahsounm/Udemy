@@ -1,0 +1,67 @@
+import os
+import requests
+from flight_data import FlightData
+
+SHEETY_AUTH = os.environ.get("SHEETY_AUTH")
+SHEETY_PRICE_ENPOINT = "https://api.sheety.co/247e75aa2439b0d8bf6b9e44d3031a5f/flightDeals/prices"
+SHEETY_USER_ENDPOINT = "https://api.sheety.co/247e75aa2439b0d8bf6b9e44d3031a5f/flightDeals/users"
+
+class DataManager:
+    def __init__(self):
+        self.auth = SHEETY_AUTH
+        self.endpoint = SHEETY_PRICE_ENPOINT
+
+
+    def get_prices(self):
+        current_flight_prices = {}
+
+        response = requests.get(url=SHEETY_PRICE_ENPOINT)
+        response.raise_for_status()
+        data = response.json()["prices"]
+
+        for city in data:
+            current_flight_prices[city["iataCode"]] = [city["id"], city["lowestPrice"]]
+        return current_flight_prices
+    
+
+    def set_new_prices(self, flights):
+        for code in flights:
+            flight = flights[code]
+            new_data = {
+                "price":{
+                    "lowestPrice":flight.price,
+                    "originAirport":flight.origin_airport,
+                    "destinationAirport":flight.destination_airport,
+                    "departDate":flight.out_date,
+                    "returnDate":flight.return_date,
+                    "airline":flight.airline
+                }
+            }
+            response = requests.put(url=SHEETY_PRICE_ENPOINT + "/" + str(flight.id), json=new_data)
+            response.raise_for_status()
+            print("done")
+        
+
+    def get_iata_codes(self):
+        codes = []
+
+        response = requests.get(url=SHEETY_PRICE_ENPOINT)
+        response.raise_for_status()
+        data = response.json()["prices"]
+
+        for city in data:
+            codes.append(city["iataCode"])
+    
+        return codes
+    
+    def get_custumer_emails(self):
+        users = {}
+
+        response = requests.get(url=SHEETY_USER_ENDPOINT)
+        response.raise_for_status()
+        data = response.json()
+        for user in data["users"]:
+            print(user)
+            users[user["id"]] = {"firstname":user["whatIsYourFirstName?"], "lastname":user["whatIsYourLastName?"], "email":user["whatIsYourEmail?"]}
+        return users
+
