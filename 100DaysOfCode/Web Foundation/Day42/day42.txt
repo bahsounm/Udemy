@@ -1,0 +1,11 @@
+HTML Boilerplate
+- like how a letter has structure HTML has a sturcture too, usially just type ! and it will automatically do it
+- specify the lang, the meta (charset), the title (whats displayed on the tab), body (all the content of the website)
+
+
+- unordered list (bullet points) = ul , in between the tags we put list items (li), 
+- ordered list (numbered) = ol, and same need to have li
+
+- anchor elements = a allows us to do many things like add href, or make things draggable
+
+- image elements = img (src url or image you have), self closng tag
