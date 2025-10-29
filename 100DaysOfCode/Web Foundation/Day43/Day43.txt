@@ -1,0 +1,11 @@
+CSS
+    - Cascading Style Sheets 
+    - styles that cascade, from braod and genral to minute and specific
+    - there are also SASS and LESS
+    - color, font, size, border, thickness, center aligned
+
+    - inline: same line as a particular html element, <html-tage style: -----
+    - external: css file on its own then use it in the html doc
+    - internal: adding a style tag in the html doc
+
+    - css selector: selects what html tag gets the css applied to can be html tag, or class name, id, etc 
