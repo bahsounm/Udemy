@@ -21,11 +21,12 @@ for code in iata_codes:
 
 # compare the prices and only keep the ones that need to change
 for code in current_flight_prices:
-    if float(current_flight_prices[code][1]) < float(cheapest_flights_found[code].price):
+    if float(current_flight_prices[code][1]) <= float(cheapest_flights_found[code].price):
         del cheapest_flights_found[code]
     else:
         cheapest_flights_found[code].set_id(current_flight_prices[code][0])
 
-
+# Set the new prices and send a message to Twilio
 data_man.set_new_prices(cheapest_flights_found)
+notif_man.notify(cheapest_flights_found)
 

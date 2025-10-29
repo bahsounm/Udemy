@@ -2,9 +2,11 @@ import os
 import requests
 import datetime as dt
 from dotenv import load_dotenv
-load_dotenv()
-
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from flight_data import FlightData
+
+load_dotenv()
 
 AMADEUS_API_KEY = os.environ.get("AMADEUS_API_KEY")
 AMADEUS_API_SECRET = os.environ.get("AMADEUS_API_SECRET")
@@ -14,6 +16,19 @@ class FlightSearch:
     def __init__(self):
         self.client_id = AMADEUS_API_KEY
         self.client_secret = AMADEUS_API_SECRET
+
+        # Reuse connections + auto-retry on flaky sandbox responses
+        self.session = requests.Session()
+        retry = Retry(
+            total=3,
+            connect=3,
+            read=3,
+            backoff_factor=0.6,                 # 0.6s, 1.2s, 2.4s
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["GET", "POST"]
+        )
+        self.session.mount("https://", HTTPAdapter(max_retries=retry))
+
         self.auth = self.get_auth()
         self.origin_iata_code = "YTO"
 
@@ -25,52 +40,71 @@ class FlightSearch:
             "client_id": self.client_id,
             "client_secret": self.client_secret
         }
-
-        response = requests.post(url=auth_endpoint, data=amadeus_body, headers=auth_headers)
-        response.raise_for_status()
-        data = response.json()
-        return data["access_token"]
+        r = self.session.post(auth_endpoint, data=amadeus_body, headers=auth_headers, timeout=(5, 45))
+        r.raise_for_status()
+        return r.json()["access_token"]
 
     def get_min_offer(self, dest_loc_code, dep_date, ret_date):
-        search_parameters = {
+        params = {
             "originLocationCode": self.origin_iata_code,
             "destinationLocationCode": dest_loc_code,
             "departureDate": dep_date.replace("/", "-"),
             "returnDate": ret_date.replace("/", "-"),
             "adults": 1,
             "currencyCode": "CAD",
-            "max": 1,  # only one offer returned
+            "max": 1,  # only one offer returned (cheapest surfaced)
         }
+        headers = {"Authorization": f"Bearer {self.auth}"}
+        url = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 
-        search_headers = {
-            "Authorization": f"Bearer {self.auth}"
-        }
+        # Try up to 3 times for this date (handles timeouts and 5xx)
+        for attempt in range(3):
+            try:
+                resp = self.session.get(url, params=params, headers=headers, timeout=(5, 60))
 
-        search_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
+                # token expired? refresh once and retry immediately
+                if resp.status_code == 401:
+                    self.auth = self.get_auth()
+                    headers["Authorization"] = f"Bearer {self.auth}"
+                    resp = self.session.get(url, params=params, headers=headers, timeout=(5, 60))
 
-        response = requests.get(url=search_endpoint, params=search_parameters, headers=search_headers, timeout=30)
-        response.raise_for_status()
-        data = response.json().get("data", [])
+                # Let session-level retry handle most cases; if a flaky status still slips through, back off
+                if resp.status_code in (500, 502, 503, 504, 429):
+                    # manual backoff then retry loop
+                    import time
+                    time.sleep(0.6 * (2 ** attempt))
+                    continue
 
-        if not data:
-            return None
+                resp.raise_for_status()
+                data = resp.json().get("data", [])
+                if not data:
+                    return None
 
-        offer = data[0]  # the only one
-        itinerary = offer["itineraries"][0]
-        segments = itinerary["segments"]
-        first_seg = segments[0]
-        last_seg = segments[-1]
+                offer = data[0]  # max=1 -> only item
+                itinerary = offer["itineraries"][0]
+                segments = itinerary["segments"]
+                first_seg = segments[0]
+                last_seg = segments[-1]
 
-        return FlightData(
-            price=offer["price"]["total"],
-            origin_airport=first_seg["departure"]["iataCode"],
-            destination_airport=last_seg["arrival"]["iataCode"],
-            out_date=dep_date,
-            return_date=ret_date,
-            airline=first_seg["carrierCode"],
-            currency=offer["price"]["currency"],
-            duration=itinerary.get("duration"),
-        )
+                return FlightData(
+                    price=offer["price"]["total"],
+                    origin_airport=first_seg["departure"]["iataCode"],
+                    destination_airport=last_seg["arrival"]["iataCode"],
+                    out_date=dep_date,
+                    return_date=ret_date,
+                    airline=first_seg["carrierCode"],
+                    currency=offer["price"]["currency"],
+                    duration=itinerary.get("duration"),
+                )
+
+            except requests.exceptions.ReadTimeout:
+                # read timed out -> backoff and retry
+                import time
+                time.sleep(0.6 * (2 ** attempt))
+                continue
+
+        # give up on this date after retries
+        return None
 
     def find_cheapest_offer(self, dest_loc_code, step_days=1, start=0, window_days=30):
         results = {}
@@ -86,14 +120,15 @@ class FlightSearch:
             dep = dep_dt.strftime("%Y-%m-%d")
             ret = ret_dt.strftime("%Y-%m-%d")
 
-            flight = self.get_min_offer(dest_loc_code, dep, ret)  # returns FlightData or None (with max=1)
+            flight = self.get_min_offer(dest_loc_code, dep, ret)  # FlightData or None
             results[dep] = flight
 
             if flight:
-                price = float(str(flight.price))  # price is usually a string
-                if (best_price is None) or (price < best_price):
-                    best_price = price
+                # price comes as string -> compare numerically
+                p = float(flight.price)
+                if (best_price is None) or (p < best_price):
+                    best_price = p
                     best = flight
 
-        # return just the cheapest flight; if you also want the per-day map, return (best, results)
+        # Return the single cheapest FlightData over the window
         return best
