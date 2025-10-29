@@ -1,0 +1,14 @@
+HTML: structuring the website 
+    - the structure and the content
+    - HyperText - text that link to other sites
+    - Markup Langauge -  tags,  underline, italic, headings, paragraph body, label etc etc
+
+    - Headings: h# tag, where the number is heading type, there is an opening an closing tag, the whole thing is called an element. Go from h1 - h6
+
+    - Paragraph: p, plain text will run into eachother if we have paragraph there will be a separtion to show the difference in the paragraphs
+
+    - Self Closing Tags: void elemetns, forbiddin from adding stuff to it tags that have / at the start tag not the end tag, hr for line breaks, br for paragraph breaks
+
+CSS: styling the website
+
+JS: behaviour of the website
