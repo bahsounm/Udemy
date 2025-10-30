@@ -1,0 +1,28 @@
+body{
+    background-color: black;
+}
+
+div{
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+}
+
+img{
+    margin: auto;
+    border: 5px, solid, white;
+
+}
+
+.big{
+    
+    font-size: 1.5rem;
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+    font-style: normal;
+    text-transform: uppercase;
+}
+.small{
+    font-size: 25px;
+
+}

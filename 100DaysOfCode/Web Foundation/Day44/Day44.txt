@@ -1,0 +1,25 @@
+CSS Colors properties
+    - property:color 
+    - background Colors
+    - color (text)
+    - names colors -  each is a hex code color, which means you can bascally use any color you can fathom
+
+Formatting Fonts
+    - font weight: how bold the text is going to be, normal, bold, or a specific number px
+    - font size: change to a px size, or pt, pt is bigger than px in terms of scaling, em (is h1 is 1em, if the parent is 20px then h1 becomes 100% of the parent if it was 2 then it would be 2* the 20 so 40) and rem (relative to the root not hte parent)
+    - font family: thsi is the font style,ariel, times etc, have a family then backup a generic type face, helvetica, snas-serif, if the font has mltiple words need to include it in a ""
+    - text-align, which way you want the text aligned center left right etc
+
+Inspecting CSS
+    - can inspect a site and see what the propeties are what hey have, whats being applied CSS wise
+    - ctrl shift i, or right click and click inspect element
+
+CSS Box Model
+    - We can change the height and width of an element, we can use percentages or we can use px
+    - Margin: adding a gap on the outide of the elemnt border, like border width can assign top right bottom and left
+    - Padding: adding agap to the inside of an element boder, like border width can assign top right bottom and left 
+    - Border: can add a border to an element box, assign the thickness, style, color -> border: 10px, solid, black
+        - border width, can soecify the top right bot and left border to different widths
+        - can also have them as top and botm and left and right it we just specify 2
+    -content division element ie div
+        - this is how we can pack elements into a invisible box, it acts as a container
