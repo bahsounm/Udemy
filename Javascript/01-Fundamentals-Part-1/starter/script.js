@@ -200,7 +200,7 @@ if (hasDriversLicense && hasGoodVision && !isTired){
     console.log("Sarah can drive")
 }else{
     console("someone else should drive")
-}*/
+}
 // ##################################################################################################################################################################  
 // switch statments, when we want to see what value a variable has, like weekday is either sunday mnday tuesday wednesday etc
 // easier to use a switch rather than an if
@@ -229,12 +229,19 @@ switch(day){ // must indlcue a break becuase it will comstinue eecting down the 
         break
     default:
         console.log("that is not a valid day")
-}
+}*/
+// ##################################################################################################################################################################  
+// Statements (does not produce a value, performs some actions) and Expressions (a piece of code that produces a value like 3+4)     
+// ##################################################################################################################################################################  
+// Conditional operator 
 
+const age = 23
+// this is like doing an if else in one line like python print(...) if .. else print()
+const activity = age >= 18 ? "I like to go to the casino" : "I like to play video games"
+console.log(activity)
 
-
-
-
+// these can be placed in a template literal 
+console.log(`he said ${age >= 18 ? "I like to go to the casino" : "I like to play video games"}`)
 
 
 
