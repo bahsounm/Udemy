@@ -147,6 +147,49 @@
 // }
 // jonas.calcAge()
 // console.log(jonas.age)
+// ===========================================================================================================================
+// Loops
+// basically the same as how we did loops in javascript
+// for (let rep = 1;rep <= 10;rep++){
+//     console.log(`Lifting weights repitition ${rep}`)
+// }
+let jonas = ["Jonas", "Brother", 25, "Teacher", ["micheal", "sherryl", "lelouch"]]
+// looping thorugh arrays 
+for(let i = 0; i < jonas.length;i++){ // like normal loops you can continue and you can break
+    console.log(jonas[i])
+}
+console.log("=======================================================")
+for(let i = 0; i < jonas.length;i++){
+    if (typeof jonas[i] !== 'string') continue
+    console.log(jonas[i])
+}
+console.log("=======================================================")
+for(let i = 1; i< 4;i++){
+    console.log(`Starting exercise ${i}`)
+    for (let j = 1;j<=5;j++){
+        console.log(`   Starting repition ${j}`)
+    }
+}
+console.log("=======================================================")
+let i = 0
+while (i<10){
+    console.log(i)
+    i++
+}
+console.log("=======================================================")
+let dice = Math.trunc(Math.random()*6)+1
+while (dice !== 6){
+    console.log(`You rolled a ${dice}`)
+    dice = Math.trunc(Math.random()*6)+1
+}
+console.log(`You rolled a ${dice}`)
+
+
+
+
+
+
+
 
 
 
