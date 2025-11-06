@@ -1,10 +1,5 @@
 from selenium import webdriver # webdriver is driving the chorme browisng and going ot do all of our automated tasks
 from selenium.webdriver.common.by import By
-#------------------------------------------------------------------------------------------------------------------
-# these are for getting passed a continue
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-#------------------------------------------------------------------------------------------------------------------
 
 # youll notice when we open the cite that it will automatically close to solve this
 chrome_options = webdriver.ChromeOptions()
@@ -18,9 +13,7 @@ driver.get("https://www.amazon.ca/dp/B075CYMYK6?ref_=cm_sw_r_cp_ud_ct_FM9M699VKH
 
 #------------------------------------------------------------------------------------------------------------------
 # this is for if there is a click to continue button that we need to get past
-continue_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.CLASS_NAME, "a-button-text"))
-    )
+continue_button = driver.find_element(By.CLASS_NAME, "a-button-text")
 continue_button.click()
 #------------------------------------------------------------------------------------------------------------------
 # can searchh by name, class, id, 
