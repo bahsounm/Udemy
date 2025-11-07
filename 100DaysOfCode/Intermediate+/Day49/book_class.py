@@ -40,41 +40,44 @@ class BookClass:
                     print(f"Booked: {class_type.capitalize()} ({date_str})")
                     self.classes["Classes booked"] += 1
                     self.detailed_list.append("[New Booking] {} Class on {}".format(class_type.capitalize(), date_str))
-
+                
+                self.verify_booking(day = wanted_date.day)
                 break 
 
             except:
                 print(f"{class_type.capitalize()} class not found on {date_str}")
                 continue
 
-    def verify_booking(self, wanted_days):
+    def verify_booking(self, day):
         self.driver.find_element(By.CSS_SELECTOR, value="#my-bookings-link").click()
-        # expected = 0
-        # found = 0
-        # for (key, value) in self.classes.items():
-        #     expected += value
+        expected = 0
+        found = 0
+        for (key, value) in self.classes.items():
+            expected += value
 
         # Check for bookings
-        # try:
-        #     confirmed_bookings = self.driver.find_element(By.CSS_SELECTOR, value="#confirmed-bookings-section")
-        #     found += len(confirmed_bookings)
-        # except:
-        #     print("Found No Booked Classes")
+        try:
+            confirmed_bookings = self.driver.find_element(By.CSS_SELECTOR, value="#confirmed-bookings-section p")
+            for sel in confirmed_bookings:
+                if str(day) in sel.text:
+                    found += 1
+        except:
+            print("Found No Booked Classes")
         
         # Check for Waitlist
         try:
             confirmed_waitlist = self.driver.find_elements(By.CSS_SELECTOR, value="#waitlist-section p")
             for sel in confirmed_waitlist:
-                print(sel.text)
-            found += len(confirmed_waitlist)
-        except:
+                if str(day) in sel.text:
+                    found += 1
+        except Exception:
             print("Found No Waitlisted Classes")
 
-        # print("--- VERIFICATION RESULT ---\nExpected: {}\nFound:{}".format(expected, found))
-        # if expected == found:
-        #     print("SUCCESS: All bookings have been verified")
-        # else:
-        #     print("OOPS there seems to be an issue verrifying yourr bookings")
+        print("--- VERIFICATION RESULT ---")
+        if expected == found:
+            print("SUCCESS: Your booking has been verified")
+        else:
+            print("OOPS there seems to be an issue verrifying yourr booking")
 
 
 

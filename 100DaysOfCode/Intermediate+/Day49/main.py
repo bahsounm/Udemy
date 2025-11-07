@@ -14,9 +14,7 @@ bot.login()
 
 booker = BookClass(bot.driver, TODAYS_DATE)
 booker.book_class(hour=18,days_from_now=5)
-# booker.book_class(hour=18,days_from_now=7)
-
-booker.verify_booking()
+booker.book_class(hour=18,days_from_now=7)
 
 # booker.print_summary()
 # booker.print_detailed_list()
