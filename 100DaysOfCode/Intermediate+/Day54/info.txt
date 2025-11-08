@@ -1,0 +1,13 @@
+Library
+    - a set of reusable functions 
+    - you are in full control when you acall a methodf from a library
+    - you can access them through an API
+    - you call it
+
+Framework
+    - a piece of code that dictates the architecurre of your project, aids in programs
+    - code never calls the framework the framework call the code
+    - proivde a standard way to build and deploy applciations 
+    - define our code in a way that the framework wants 
+
+
