@@ -1,0 +1,8 @@
+bootstrap is a css framework, its basically css that is pre bult all we need to do is add the class name in the appropiate elements
+
+the downside is that we will get class bloat, too many classes and styling and looks less clean
+
+
+
+
+
