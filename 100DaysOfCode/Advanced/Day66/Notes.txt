@@ -1,0 +1,20 @@
+Building our own REST API 
+
+    REST is an architecutrual style, 
+
+    another style is graphql, soap., falcor, but rest is the main for web apis
+
+    REST - REpresentational State Transfer
+
+        HTTP Request Verbs 
+            GET, POST, PUT, PATCH, DELETE
+
+        Specifc Pattern of Routes/Endpoint URLs
+            has rules and orting for general and speicifc items your working with
+
+
+    
+
+
+
+
