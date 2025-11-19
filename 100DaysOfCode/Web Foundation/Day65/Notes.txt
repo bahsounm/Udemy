@@ -1,0 +1,28 @@
+Understanding Color Theory
+    mood of the color, be consistent, does it match the message youre trying to protray
+
+    each color has ther wn categories google when thinking about what yto choose 
+
+    analogous colors good for smoothness
+
+    complimentary colors are for pop
+
+    colorhunt and adobe color wheel
+
+
+Understanding Typohraphy and how to choose Fonts
+    again need to consider the mod, what youre trying to deliver, get across
+
+    google the emotion behind fonts 
+
+Manage ATTENTION with effective UI design
+    use font sizes, color, etc to establish a hierarchy
+
+    whitespace - Lines - layout - Audience
+
+User Experience Design 
+    lets teh user do their thing
+
+    simplicity - consistency - reading patterns - All Platform Deisgn
+
+    
