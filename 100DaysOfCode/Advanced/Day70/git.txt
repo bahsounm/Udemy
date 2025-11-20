@@ -1,0 +1,23 @@
+this day is just about some git stuff
+
+touch <file> to create
+
+git init to make a git local repo
+
+ls -a to see hidden files
+
+git status
+
+git add .
+
+git commit -m 'commit messages'
+
+git log
+
+
+git branch
+
+git branh <name>
+
+
+
