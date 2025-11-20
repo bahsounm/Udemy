@@ -1,0 +1,7 @@
+Bootstrap_Flask
+Flask_CKEditor
+Flask_Login
+Flask-Gravatar
+Flask_WTF
+Flask
+flask_sqlalchemy
