@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bahsoun.connectthree.MainActivity">
+
+    <GridLayout
+        android:id="@+id/grid"
+        android:layout_width="368dp"
+        android:layout_height="368dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/board"
+        android:columnCount="3"
+        android:rowCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/zero"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:onClick="dropIn"
+            android:tag="0" />
+
+        <ImageView
+            android:id="@+id/one"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="0dp"
+            android:onClick="dropIn"
+            android:tag="1"/>
+
+        <ImageView
+            android:id="@+id/two"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="0dp"
+            android:onClick="dropIn"
+            android:tag="2"/>
+
+        <ImageView
+            android:id="@+id/three"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="0dp"
+            android:onClick="dropIn"
+            android:tag="3"/>
+
+        <ImageView
+            android:id="@+id/four"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:onClick="dropIn"
+            android:tag="4"/>
+
+        <ImageView
+            android:id="@+id/five"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:onClick="dropIn"
+            android:tag="5"/>
+
+        <ImageView
+            android:id="@+id/six"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="0dp"
+            android:onClick="dropIn"
+            android:tag="6"/>
+
+        <ImageView
+            android:id="@+id/seven"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:onClick="dropIn"
+            android:tag="7"/>
+
+        <ImageView
+            android:id="@+id/eight"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:onClick="dropIn"
+            android:tag="8"/>
+    </GridLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="16dp"
+        android:onClick="clearBoard"
+        android:text="Clear Board"
+        app:layout_constraintBottom_toTopOf="@+id/grid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
